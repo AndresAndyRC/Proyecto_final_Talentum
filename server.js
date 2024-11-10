@@ -367,11 +367,23 @@ app.get('/admin', (req, res) => {
             return;
         }
         res.render('admin', { 
-            Cursos: results
+            cursos: results
         });
     });
 });
 
+// Agregar un nuevo curso
+app.post('/cursos', (req, res) => {
+    const { nombre_curso, URL_curso, duracion, valor, institucion } = req.body;
+    const sql = 'INSERT INTO cursos (nombre_curso, URL_curso, duracion, valor, institucion ) VALUES (?, ?, ?, ?, ?)';
+    db.query(sql, [nombre_curso, URL_curso, duracion, valor, institucion], (err, result) => {
+        if (err) {
+            res.status(500).send('Error agregando el curso');
+            return;
+        }
+        res.redirect('/admin');
+    });
+});
 
 
 
