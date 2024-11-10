@@ -367,11 +367,16 @@ app.get('/admin', isAdmin, (req, res) => {
             return res.status(500).send('Error al cargar los cursos');
         }
 
-        console.log("Resultados de la consulta a cursos:", results); // Verifica el contenido de los resultados
+        console.log("Resultados de la consulta a cursos:", results);
+        console.log("Tipo de results:", typeof results);
+        console.log("¿Results es array?", Array.isArray(results));
         
-        // Pasar todos los cursos a la vista, con el nombre 'cursos'
+        // Asegúrate de que results no sea null o undefined
+        const cursosData = results || [];
+        
         res.render('admin', { 
-            cursos: results // Asegúrate de pasar el nombre exacto 'cursos'
+            cursos: cursosData,
+            user: req.user // Si tienes información del usuario, también pásala
         });
     });
 });
