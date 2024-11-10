@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Perfil de Usuario</title>
+</head>
+<body>
+    <div>
+        <h2>Perfil de <%= usuario.nickname %></h2> 
+    </div>
+    
+    <!-- Calificaciones -->
+    <div>
+        <h3>Calificaciones</h3>
+        <% if (calificaciones && calificaciones.length > 0) { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Curso</th>
+                        <th>Calificación</th>
+                        <th>Detalles</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% calificaciones.forEach(cal => { %>
+                        <tr>
+                            <td><%= cal.nombre_curso %></td>
+                            <td><%= cal.calificacion %></td>
+                            <td><%= cal.detalles %></td>
+                            <td>
+                                <a href="/perfil/<%= cal.id %>/editar">Editar</a> | 
+                                <a href="/borrarOpinion/<%= cal.id %>">Eliminar</a>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p>No hay calificaciones disponibles</p>
+        <% } %>
+    </div>
+    
+    
+    <a href="/logout">Cerrar Sesión</a>
+</body>
+</html>
