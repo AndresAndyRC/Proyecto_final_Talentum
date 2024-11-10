@@ -360,7 +360,7 @@ app.get('/cursos', isUser, (req, res) => {
 // Rutas para manejar la información de los cursos
 
 // Obtener todos los cursos
-app.get('/admin', (req, res) => {
+app.get('/admin', isAdmin ,(req, res) => {
     db.query('SELECT * FROM cursos', (err, results) => {
         if (err) {
             res.status(500).send('Error obteniendo los cursos');
@@ -373,7 +373,7 @@ app.get('/admin', (req, res) => {
 });
 
 // Agregar un nuevo curso
-app.post('/cursos', (req, res) => {
+app.post('/admin', isAdmin , (req, res) => {
     const { nombre_curso, URL_curso, duracion, valor, institucion } = req.body;
     const sql = 'INSERT INTO cursos (nombre_curso, URL_curso, duracion, valor, institucion ) VALUES (?, ?, ?, ?, ?)';
     db.query(sql, [nombre_curso, URL_curso, duracion, valor, institucion], (err, result) => {
