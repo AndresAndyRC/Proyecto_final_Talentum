@@ -1,0 +1,45 @@
+/* Estilos generales para los botones "Ver" */
+.curso .card button {
+    padding: 12px 24px;
+    background: linear-gradient(45deg, #04012cc7, #011c1f); /* Gradiente de colores */
+    color: white;
+    border: none;
+    border-radius: 25px; /* Bordes redondeados */
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* Sombra para darle profundidad */
+    transition: transform 0.3s ease, background 0.3s ease; /* Transiciones suaves */
+}
+
+/* Efecto al pasar el ratón por encima */
+.curso .card button:hover {
+    background: linear-gradient(45deg, #d47336, #764323); /* Gradiente invertido al pasar el ratón */
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+}
+
+/* Efecto al hacer clic */
+.curso .card button:active {
+    transform: scale(0.95); /* Disminuye ligeramente el tamaño al hacer clic */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Reduce la sombra */
+}
+
+/* Estilos adicionales para mejor apariencia */
+.curso .card button:focus {
+    outline: none; /* Elimina el borde de enfoque */
+}
+
+.curso .card {
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra para las tarjetas */
+}
+
+.curso .card h3 {
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+

@@ -95,7 +95,7 @@ db.query(`
         id INT AUTO_INCREMENT PRIMARY KEY,
         id_usuario INT NOT NULL,
         id_curso INT NOT NULL,
-        calificacion INT NOT NULL CHECK (calificacion BETWEEN 1 AND 10),
+        calificacion INT NOT NULL CHECK (calificacion BETWEEN 1 AND 5),
         detalles VARCHAR(255) NOT NULL,
         fecha DATE NOT NULL,
         FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE ON UPDATE CASCADE,
