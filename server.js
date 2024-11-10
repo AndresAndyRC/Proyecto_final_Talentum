@@ -374,6 +374,7 @@ app.get('/admin', isAdmin ,(req, res) => {
 
 // Agregar un nuevo curso
 app.post('/admin', isAdmin , (req, res) => {
+    console.log(req.body);
     const { nombre_curso, URL_curso, duracion, valor, institucion } = req.body;
     const sql = 'INSERT INTO cursos (nombre_curso, URL_curso, duracion, valor, institucion ) VALUES (?, ?, ?, ?, ?)';
     db.query(sql, [nombre_curso, URL_curso, duracion, valor, institucion], (err, result) => {
