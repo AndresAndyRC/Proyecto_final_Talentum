@@ -107,6 +107,30 @@ db.query(`
     console.log("Tabla 'calificaciones' creada o verificada");
 });
 
+// Insertar roles si no existen
+db.query(`
+    INSERT INTO roles (rol) 
+    SELECT * FROM (SELECT 'admin') AS tmp 
+    WHERE NOT EXISTS (
+        SELECT rol FROM roles WHERE rol = 'admin'
+    ) LIMIT 1;
+`, err => {
+    if (err) throw err;
+    console.log("Rol 'admin' verificado o agregado");
+});
+
+db.query(`
+    INSERT INTO roles (rol) 
+    SELECT * FROM (SELECT 'usuario') AS tmp 
+    WHERE NOT EXISTS (
+        SELECT rol FROM roles WHERE rol = 'usuario'
+    ) LIMIT 1;
+`, err => {
+    if (err) throw err;
+    console.log("Rol 'usuario' verificado o agregado");
+});
+
+
 // ------------- creamos las vistas -------------
 
 // Mostramos la ruta principal, esto muestra y conecta con index
