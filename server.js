@@ -303,19 +303,38 @@ app.get('/perfil', isUser, (req, res) => {
 });
 
 
-// mostrar opinion de opiniones 
+// Mostrar formulario de edición de una calificación específica
+app.get('/editarOpinion/:id', isUser, (req, res) => {
+    const { id } = req.params;
+    const query = 'SELECT * FROM calificaciones WHERE id = ?';
 
-app.put('/editarOpinion', isUser, (req, res) =>{
-    const {calificacion, detalles, fecha, id} = req.body;
-    const query = 'UPDATE calificaciones SET calificacion = ?, detalles = ?, fecha = ? WHERE id_curso = ?';
+    db.query(query, [id], (error, results) => {
+        if (error) {
+            console.error('Error al obtener la calificación para editar:', error);
+            return res.status(500).send('Error al cargar la calificación para editar');
+        }
+        if (results.length === 0) {
+            return res.status(404).send('Calificación no encontrada');
+        }
+        res.render('editarOpinion', { calificacion: results[0] });
+    });
+});
+
+// Actualizar calificación en la base de datos
+app.put('/editarOpinion/:id', isUser, (req, res) => {
+    const { calificacion, detalles, fecha } = req.body;
+    const { id } = req.params;
+    const query = 'UPDATE calificaciones SET calificacion = ?, detalles = ?, fecha = ? WHERE id = ?';
+
     db.query(query, [calificacion, detalles, fecha, id], (error, result) => {
         if (error) {
-            res.status(500).send('Error al actualizar la calificación');
-            return;
+            console.error('Error al actualizar la calificación:', error);
+            return res.status(500).send('Error al actualizar la calificación');
         }
-        res.redirect('perfil');
-    })
+        res.redirect('/perfil');
+    });
 });
+
 
 // eliminacion de calificacion
 
