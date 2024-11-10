@@ -399,6 +399,25 @@ app.post('/admin', isAdmin , (req, res) => {
 
 
 
+// eliminar el curso
+
+// eliminacion de calificacion
+
+app.get('/eliminarCurso/:id', isUser, (req, res) => {
+    const { id } = req.params;
+    const query = 'DELETE FROM cursos WHERE id =?';
+    db.query(query, [id], (error, result) => {
+        if (error) {
+            res.status(500).send('Error al eliminar el curso');
+            return;
+        }
+        // Redirigir al perfil después de eliminar el curso
+        res.redirect('/adminCursos');
+    });
+});
+
+
+
 
 
 
