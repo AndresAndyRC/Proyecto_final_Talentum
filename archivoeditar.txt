@@ -1,0 +1,72 @@
+app.get('/perfil', isUser, (req, res) => { 
+    const userId = req.session.userId;
+    
+    // Consulta para obtener la información del perfil, calificaciones y cursos
+    const query = `
+        SELECT 
+            u.id,
+            u.nickname,
+            c.id AS calificacion_id,
+            c.calificacion,
+            c.detalles,
+            c.fecha,
+            cr.nombre_curso,
+            cr.URL_curso,
+            cr.duracion,
+            cr.valor,
+            cr.institucion
+        FROM 
+            usuarios u
+        LEFT JOIN 
+            calificaciones c ON u.id = c.id_usuario
+        LEFT JOIN 
+            cursos cr ON c.id_curso = cr.id
+        WHERE 
+            u.id = ?;`;
+
+    db.query(query, [userId], (error, results) => {
+        if (error) {
+            console.error('Error al obtener datos del perfil:', error);
+            return res.status(500).send('Error al cargar el perfil');
+        }
+
+        // Si no hay resultados
+        if (results.length === 0) {
+            return res.redirect('/');
+        }
+
+        // Organizar los resultados por curso, para pasar a la vista
+        const cursos = [];
+        const calificaciones = [];
+
+        results.forEach(result => {
+            // Si el curso ya está en el array, no lo añadimos de nuevo
+            if (!cursos.some(curso => curso.nombre_curso === result.nombre_curso)) {
+                cursos.push({
+                    nombre_curso: result.nombre_curso,
+                    URL_curso: result.URL_curso,
+                    duracion: result.duracion,
+                    valor: result.valor,
+                    institucion: result.institucion
+                });
+            }
+
+            // Agregar la calificación si existe
+            if (result.calificacion_id) {
+                calificaciones.push({
+                    calificacion_id: result.calificacion_id,
+                    calificacion: result.calificacion,
+                    detalles: result.detalles,
+                    fecha: result.fecha
+                });
+            }
+        });
+
+        // Pasar los datos a la vista
+        res.render('perfil', { 
+            usuario: results[0],  // Usamos el primer resultado para los datos del usuario
+            calificaciones: calificaciones,  // Todas las calificaciones del usuario
+            cursos: cursos  // Lista de cursos
+        });
+    });
+});
