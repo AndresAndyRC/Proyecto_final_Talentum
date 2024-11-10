@@ -236,6 +236,7 @@ app.get('/admin', isAdmin, (req, res) => {
     res.render('admin');
 });
 
+//------------ api de perfil   -------------- //
 // Mostramos la ruta de perfil
 
 app.get('/perfil', isUser, (req, res) => {
