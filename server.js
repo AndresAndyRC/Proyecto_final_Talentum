@@ -268,7 +268,7 @@ app.get('/perfil', isUser, (req, res) => {
         SELECT 
         u.id,
         u.nickname,
-        c.id AS calificacion_id,
+        c.id,
         c.calificacion,
         c.detalles,
         c.fecha,
@@ -303,9 +303,9 @@ app.get('/perfil', isUser, (req, res) => {
 });
 
 
-// actualizacion de opiniones 
+// mostrar opinion de opiniones 
 
-app.put('/perfil', isUser, (req, res) =>{
+app.put('/editarOpinion', isUser, (req, res) =>{
     const {calificacion, detalles, fecha, id} = req.body;
     const query = 'UPDATE calificaciones SET calificacion = ?, detalles = ?, fecha = ? WHERE id_curso = ?';
     db.query(query, [calificacion, detalles, fecha, id], (error, result) => {
