@@ -148,6 +148,20 @@ app.get('/registrar', (req, res) => {
 
 // ---------------Api para manejar el registro  ----------------------------------
 
+//crear admin
+//ruta de registro
+db.query(`
+    INSERT INTO usuarios (nombres, apellidos, email, telefono, nickname, contraseña, fecha_creacion, rol_id)
+    SELECT * FROM (SELECT 'admin', 'admin', 'admin@admin.com', '1234567891', 'admin', '1234', '2024-11-09', 1) AS tmp
+    WHERE NOT EXISTS (
+        SELECT 1 FROM usuarios WHERE email = 'admin@admin.com' OR nickname = 'admin'
+    )
+    LIMIT 1;;
+`, err => {
+    if (err) throw err;
+    console.log("usuario de admin creado exitosamente");
+});
+
 //ruta de registro
 app.post('/registrar', async (req, res) => {
     //console.log(req.body); //muestra los datos enviados en consola a traves de un JSON para confirmar valores
