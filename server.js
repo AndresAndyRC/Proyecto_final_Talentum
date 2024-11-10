@@ -217,8 +217,6 @@ const isAdmin = (req, res, next) => {
     if (!req.session.userId || req.session.rolId !== 1) {
         // Si no hay sesión o el rol no es admin (1)
         return res.redirect('/perfil');  // Redirige al perfil normal
-        // O puedes enviar un mensaje de error
-        // return res.status(403).send('Acceso no autorizado');
     }
     next();
 };
