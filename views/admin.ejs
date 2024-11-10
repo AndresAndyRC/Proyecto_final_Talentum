@@ -74,45 +74,15 @@
                     </div>
                     
                     <button type="submit" class="btn btn-primary">Agregar Curso</button>
+                    
                 </form>
                 
                 <hr>
                 
-                <!-- Tabla para listar los cursos -->
-                <h3>Lista de Cursos</h3>
-                <table class="table table-striped">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Título del Curso</th>
-                            <th>Ruta Web</th>
-                            <th>Duración</th>
-                            <th>Valor</th>
-                            <th>Institución</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% if (typeof cursos !== 'undefined' && cursos && cursos.length > 0) { %>
-                            <% cursos.forEach(curso => { %>
-                                <tr>
-                                    <td><%= curso.nombre_curso %></td>
-                                    <td><%= curso.URL_curso %></td>
-                                    <td><%= curso.duracion %></td>
-                                    <td><%= curso.valor %></td>
-                                    <td><%= curso.institucion %></td>
-                                    <td>
-                                        <a href="/cursos/<%= curso.id %>/ver" class="btn btn-primary">Ver</a>
-                                        <a href="/cursos/<%= curso.id %>/eliminar" class="btn btn-danger">Eliminar</a>
-                                    </td>
-                                </tr>
-                            <% }); %>
-                        <% } else { %>
-                            <tr>
-                                <td colspan="6">No hay cursos disponibles</td>
-                            </tr>
-                        <% } %>
-                    </tbody>
-                </table>
+                <h1>hola</h1><br>
+                
+                <button class="btn btn-primary"><a href="adminCursos">asdaf</a></button>
+                
             </div>
         </div>
     </div>

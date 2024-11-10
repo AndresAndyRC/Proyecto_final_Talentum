@@ -360,7 +360,7 @@ app.get('/cursos', isUser, (req, res) => {
 // Rutas para manejar la información de los cursos
 
 //traer informacion de cursos
-app.get('/admin', isAdmin, (req, res) => {
+app.get('/adminCursos', isAdmin, (req, res) => {
     db.query('SELECT * FROM cursos', (error, results) => {
         if (error) {
             console.error('Error al obtener los cursos:', error);
@@ -374,7 +374,7 @@ app.get('/admin', isAdmin, (req, res) => {
         // Asegúrate de que results no sea null o undefined
         const cursosData = results || [];
         
-        res.render('admin', { 
+        res.render('adminCursos', { 
             cursos: cursosData,
             user: req.user // Si tienes información del usuario, también pásala
         });
