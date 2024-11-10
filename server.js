@@ -360,22 +360,18 @@ app.get('/cursos', isUser, (req, res) => {
 // Rutas para manejar la información de los cursos
 
 //traer informacion de cursos
-app.get('/admin', isUser, (req, res) => { 
-    const userId = req.session.userId;
-    
-    // Consulta SQL para obtener todos los cursos
-    const query = `
-        SELECT * FROM cursos;
-    `;
-    db.query(query, [userId], (error, results) => {
+app.get('/admin', isAdmin, (req, res) => {
+    db.query('SELECT * FROM cursos', (error, results) => {
         if (error) {
             console.error('Error al obtener los cursos:', error);
             return res.status(500).send('Error al cargar los cursos');
         }
 
+        console.log("Resultados de la consulta a cursos:", results); // Verifica el contenido de los resultados
+        
         // Pasar todos los cursos a la vista, con el nombre 'cursos'
         res.render('admin', { 
-            cursos: results // Cambié 'curso' por 'cursos' para pasar el arreglo completo
+            cursos: results // Asegúrate de pasar el nombre exacto 'cursos'
         });
     });
 });
