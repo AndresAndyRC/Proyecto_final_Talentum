@@ -65,7 +65,10 @@
                             <div class="curso-izquierda">
                                 <div class="card">
                                     <h3><%= curso.nombre_curso %></h3> <!-- Nombre del curso -->
-                                    <button><a href="  /info_curso/<%= curso.id %>">Ver más</a></button> <!-- Enlace al curso -->
+                                    <button class="btn btn-primary">
+                                        <a href="/info_curso/<%= curso.id %>" class="btn-link">Ver más</a>
+                                    </button> <!-- Enlace al curso -->
+                                    
                                 </div>
                             </div>
                         </div>
