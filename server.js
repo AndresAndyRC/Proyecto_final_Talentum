@@ -355,7 +355,22 @@ app.get('/cursos', isUser, (req, res) => {
         });
     });
 });
+//------------------Api de admin------------------
 
+// Rutas para manejar la información de los cursos
+
+// Obtener todos los cursos
+app.get('/admin', (req, res) => {
+    db.query('SELECT * FROM cursos', (err, results) => {
+        if (err) {
+            res.status(500).send('Error obteniendo los cursos');
+            return;
+        }
+        res.render('admin', { 
+            Cursos: results
+        });
+    });
+});
 
 
 
