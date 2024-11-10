@@ -37,6 +37,11 @@ app.use(session({
     saveUninitialized: true,
 }))
 
+// para actualizar se requiere de :
+
+const methodOverride = require('method-override');
+app.use(methodOverride('_method'));
+
 // Llamamos la conexion a la base de datos
 
 const db = require('./database/db');
@@ -321,7 +326,7 @@ app.get('/editarOpinion/:id', isUser, (req, res) => {
 });
 
 // Actualizar calificación en la base de datos
-app.put('/editarOpinion/:id', isUser, (req, res) => {
+app.put('/actuOpinion/:id', isUser, (req, res) => {
     const { calificacion, detalles, fecha } = req.body;
     const { id } = req.params;
     const query = 'UPDATE calificaciones SET calificacion = ?, detalles = ?, fecha = ? WHERE id = ?';
