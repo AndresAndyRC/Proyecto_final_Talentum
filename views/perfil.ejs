@@ -57,7 +57,7 @@
         <main class="container my-4 text-center">
             <section class="curso row g-4">
                 <h3>Calificaciones</h3>
-                <% if (calificaciones && calificaciones.length > 0) { %>
+                <% if (Array.isArray(calificaciones) && calificaciones.length > 0) { %>
                     <% calificaciones.forEach(cal => { %>
                         <div class="col-md-4"> <!-- Columna para cada tarjeta -->
                             <div class="card p-3">
@@ -78,8 +78,8 @@
                                 </div>
                                 
                                 <div class="d-flex justify-content-center">
-                                    <a href="/editarOpinion/<%= cal.id %>" class="btn btn-primary btn-sm me-2">Editar</a>
-                                    <a href="/borrarOpinion/<%= cal.id %>" class="btn btn-secondary btn-sm">Eliminar</a>
+                                    <a href="/editarOpinion/<%= cal.calificacion_id %>" class="btn btn-primary btn-sm me-2">Editar</a>
+                                    <a href="/borrarOpinion/<%= cal.calificacion_id %>" class="btn btn-secondary btn-sm">Eliminar</a>
                                 </div>
                             </div>
                         </div>

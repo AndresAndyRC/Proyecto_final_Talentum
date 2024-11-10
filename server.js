@@ -271,13 +271,13 @@ app.get('/perfil', isUser, (req, res) => {
     const userId = req.session.userId;
     const query = `
         SELECT 
-        u.id,
-        u.nickname,
-        c.id,
-        c.calificacion,
-        c.detalles,
-        c.fecha,
-        cr.nombre_curso
+            u.id,
+            u.nickname,
+            c.id AS calificacion_id,
+            c.calificacion,
+            c.detalles,
+            c.fecha,
+            cr.nombre_curso
         FROM 
             usuarios u
         LEFT JOIN 
@@ -293,20 +293,16 @@ app.get('/perfil', isUser, (req, res) => {
             return res.status(500).send('Error al cargar el perfil');
         }
 
-        // Si no hay resultados
-        if (results.length === 0) {
-            return res.redirect('/');
-        }
+        // Separar el usuario de las calificaciones
+        const usuario = {
+            id: results[0]?.id,
+            nickname: results[0]?.nickname
+        };
+        const calificaciones = results.filter(row => row.calificacion_id !== null);
 
-        // Pasar los resultados a la vista
-        res.render('perfil', { 
-            usuario: results[0],
-            calificaciones: results, // Todos los resultados para múltiples calificaciones
-            curso: results
-        });
+        res.render('perfil', { usuario, calificaciones });
     });
 });
-
 
 // Mostrar formulario de edición de una calificación específica
 app.get('/editarOpinion/:id', isUser, (req, res) => {
@@ -356,7 +352,6 @@ app.get('/borrarOpinion/:id', isUser, (req, res) => {
     });
 });
 
-
 //-----------------api para cursos-----------------------------//
 
 //traer informacion de cursos
@@ -379,6 +374,7 @@ app.get('/cursos', isUser, (req, res) => {
         });
     });
 });
+
 //------------------Api de admin------------------
 
 // Rutas para manejar la información de los cursos
@@ -405,8 +401,8 @@ app.get('/adminCursos', isAdmin, (req, res) => {
     });
 });
 
-
 // Agregar un nuevo curso
+
 app.post('/admin', isAdmin , (req, res) => {
     const { nombre_curso, URL_curso, duracion, valor, institucion } = req.body;
     const sql = 'INSERT INTO cursos (nombre_curso, URL_curso, duracion, valor, institucion ) VALUES (?, ?, ?, ?, ?)';
@@ -419,13 +415,7 @@ app.post('/admin', isAdmin , (req, res) => {
     });
 });
 
-
-
-
-
 // eliminar el curso
-
-// eliminacion de calificacion
 
 app.get('/eliminarCurso/:id', isUser, (req, res) => {
     const { id } = req.params;
@@ -447,7 +437,7 @@ app.get('/eliminarCurso/:id', isUser, (req, res) => {
 
 
 
-
+//siempre debe ir al final 
 
 // Ruta para cerrar sesión
 app.get('/logout', (req, res) => {
