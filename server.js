@@ -310,6 +310,29 @@ app.get('/borrarOpinion/:id', isUser, (req, res) => {
 });
 
 
+//-----------------api para cursos-----------------------------//
+
+//traer informacion de cursos
+app.get('/cursos', isUser, (req, res) => { 
+    const userId = req.session.userId;
+    
+    // Consulta SQL para obtener todos los cursos
+    const query = `
+        SELECT * FROM cursos;
+    `;
+    db.query(query, [userId], (error, results) => {
+        if (error) {
+            console.error('Error al obtener los cursos:', error);
+            return res.status(500).send('Error al cargar los cursos');
+        }
+
+        // Pasar todos los cursos a la vista, con el nombre 'cursos'
+        res.render('cursos', { 
+            cursos: results // Cambié 'curso' por 'cursos' para pasar el arreglo completo
+        });
+    });
+});
+
 
 
 
