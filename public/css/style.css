@@ -1,0 +1,74 @@
+/* reset de CSS inicio - eliminas las características predeterminadas sobre navegadores */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+/* reset de CSS fin */
+/* inicio de estilos sección index.html */
+
+body{
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+/* fin de estilos  index.html*/
+
+/* seccion tiutlo */
+
+.titulo_bienvenida{
+  font-size: 40px;
+  text-align: center;
+  padding: 50px;
+}
+
+/* sección inicio */
+
+.inicio{
+  background-color: #fdfdfd;
+  margin: auto;
+  width: 350px;
+  text-align: center;
+  padding: 50px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 0 #cccccc6b;
+  border: solid 1px #cccccc;
+}
+
+/* sección resgitro */
+
+.registro_div{
+  background-color: #fdfdfd;
+  margin: auto;
+  width: 350px;
+  text-align: center;
+  padding: 25px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 0 #cccccc6b;
+  border: solid 1px #cccccc;
+}
+
+/* seccion de p inicio  */
+
+.titulo_pag{
+  font-weight: bold;
+}
+/* seccion boton */
+
+.botones{
+  margin-bottom: 10px;
+}
+
+/* seccion de label*/
+.divInicio label{ 
+    font-size: 15px;
+    margin-bottom: 2px;
+    font-weight: bold;
+}
+
+/* seccion de input*/
+.divInicio input{ 
+    font-size: 15px;
+    height: 34px;
+}
+
+
