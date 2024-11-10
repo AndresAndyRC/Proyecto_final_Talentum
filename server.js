@@ -130,21 +130,31 @@ db.query(`
     console.log("Rol 'usuario' verificado o agregado");
 });
 
-let contrAdmin = 1234;
-let pass = await bcryptjs.hash(contrAdmin, 8);
+async function crearUsuarioAdmin() {
+    try {
+        let contrAdmin = '1234'; // Cambiado a string para evitar problemas con bcryptjs
+        let pass = await bcryptjs.hash(contrAdmin, 8);
 
-db.query(`
-    INSERT INTO usuarios (nombres, apellidos, email, telefono, nickname, contraseña, fecha_creacion, rol_id)
-    SELECT * FROM (SELECT 'administrador', 'admin', 'admin@admin.com', '1234567891', 'agregador', 
-                   '${pass}', '2024-11-09', 1) AS tmp
-    WHERE NOT EXISTS (
-        SELECT nickname FROM usuarios WHERE nickname = 'admin'
-    )
-    LIMIT 1;
-`, err => {
-    if (err) throw err;
-    console.log("usuario de admin creado exitosamente");
-}); 
+        const query = `
+            INSERT INTO usuarios (nombres, apellidos, email, telefono, nickname, contraseña, fecha_creacion, rol_id)
+            SELECT * FROM (SELECT 'administrador', 'eladmin', 'admin@admin.com', '1234567891', 'admin', 
+                           ?, '2024-11-09', 1) AS tmp
+            WHERE NOT EXISTS (
+                SELECT nickname FROM usuarios WHERE nickname = 'admin'
+            )
+            LIMIT 1;
+        `;
+
+        db.query(query, [pass], (err) => {
+            if (err) throw err;
+            console.log("Usuario de admin creado exitosamente");
+        });
+    } catch (error) {
+        console.error("Error creando el usuario admin:", error);
+    }
+}
+
+crearUsuarioAdmin();
 
 // ------------- creamos las vistas -------------
 
