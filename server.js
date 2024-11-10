@@ -144,7 +144,7 @@ db.query(`
 `, err => {
     if (err) throw err;
     console.log("usuario de admin creado exitosamente");
-});
+}); 
 
 // ------------- creamos las vistas -------------
 
