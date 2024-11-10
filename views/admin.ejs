@@ -89,17 +89,29 @@
                     <thead class="table-dark">
                         <tr>
                             <th>Título del Curso</th>
-                            <th>Descripción</th>
                             <th>Ruta Web</th>
                             <th>Duración</th>
                             <th>Valor</th>
                             <th>Institución</th>
                             <th>Acciones</th>
-                            <th>Opciones</th>
                         </tr>
                     </thead>
-                    <tbody id="course-list">
-                        <!-- Aquí se añadirán los cursos dinámicamente mediante JavaScript -->
+                    <tbody>
+                        <% cursos.forEach(curso => { %>
+                            <tr>
+                                <td><%= curso.nombre_curso %></td>
+                                <td><%= curso.URL_curso %></td>
+                                <td><%= curso.duracion %></td>
+                                <td><%= curso.valor %></td>
+                                <td><%= curso.institucion %></td>
+                                <td>
+                                    <!-- Botón de ejemplo de acción (ver detalles, editar, etc.) -->
+                                    <a href="/cursos/<%= curso.id %>/ver" class="btn btn-primary">Ver</a>
+                                    <!-- Ejemplo de opción adicional (eliminar) -->
+                                    <a href="/cursos/<%= curso.id %>/eliminar" class="btn btn-danger">Eliminar</a>
+                                </td>
+                            </tr>
+                        <% }); %>
                     </tbody>
                 </table>
             </div>

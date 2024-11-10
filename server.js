@@ -359,22 +359,30 @@ app.get('/cursos', isUser, (req, res) => {
 
 // Rutas para manejar la información de los cursos
 
-// Obtener todos los cursos
 app.get('/admin', isAdmin ,(req, res) => {
     db.query('SELECT * FROM cursos', (err, results) => {
         if (err) {
             res.status(500).send('Error obteniendo los cursos');
             return;
         }
+        
+        console.log("Resultados de la consulta a cursos:", results); // Verifica el contenido de los resultados
+        
+        if (results.length === 0) {
+            console.log("No se encontraron cursos en la base de datos.");
+        } else {
+            console.log("Cursos obtenidos:", results);
+        }
+        
         res.render('admin', { 
             cursos: results
         });
     });
 });
 
+
 // Agregar un nuevo curso
 app.post('/admin', isAdmin , (req, res) => {
-    console.log(req.body);
     const { nombre_curso, URL_curso, duracion, valor, institucion } = req.body;
     const sql = 'INSERT INTO cursos (nombre_curso, URL_curso, duracion, valor, institucion ) VALUES (?, ?, ?, ?, ?)';
     db.query(sql, [nombre_curso, URL_curso, duracion, valor, institucion], (err, result) => {
