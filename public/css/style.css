@@ -71,4 +71,15 @@ body{
     height: 34px;
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+}
 
+main {
+  flex: 1;
+}
+
+footer {
+  margin-top: auto;
+}

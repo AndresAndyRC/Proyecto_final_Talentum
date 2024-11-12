@@ -430,6 +430,24 @@ app.get('/eliminarCurso/:id', isUser, (req, res) => {
     });
 });
 
+// ------------ api info_cursos --------------------
+
+app.get('/info_cursos/:id', isUser, (req, res) => {
+    const { id } = req.params;
+    const query = 'SELECT * FROM cursos WHERE id = ?';
+    db.query(query, [id], (error, result) => {
+        if (error) {
+            res.status(500).send('Error al obtener el curso');
+            return;
+        }
+
+        if (result.length > 0) {
+            res.render('info_cursos', { curso: result[0] }); // Renderiza la vista con los datos del curso
+        } else {
+            res.status(404).send('Curso no encontrado');
+        }
+    });
+});
 
 
 
