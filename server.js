@@ -413,6 +413,7 @@ app.post('/admin', isAdmin , (req, res) => {
         res.redirect('/admin');
     });
 });
+
 // Ruta GET para editar un curso
 app.get('/editarcurso/:id', isAdmin, (req, res) => {
     const { id } = req.params;
@@ -482,24 +483,55 @@ app.get('/info_cursos/:id', isUser, (req, res) => {
     });
 });
 
-// Ruta para agregar una calificación y opinión
-app.post('/calificaciones', (req, res) => {
-    const { id_Usuario, id_curso, Calificacion, Detalles, Fecha } = req.body;
+// carga la vista de calificar con el id del curso 
 
+app.get('/calificar/:id', (req, res) => {
+    const id_curso = req.params.id;
+    const query = 'SELECT * FROM cursos WHERE id = ?';
+
+    db.query(query, [id_curso], (err, resultados) => {
+        if (err) {
+            console.error('Error al obtener el curso:', err);
+            return res.status(500).send('Error interno del servidor');
+        }
+
+        if (resultados.length === 0) {
+            return res.status(404).send('Curso no encontrado');
+        }
+
+        const curso = resultados[0];
+        res.render('calificar', { curso });  // Pasar el curso a la vista
+    });
+});
+
+
+// Ruta para agregar una calificación y opinión
+// Ruta para agregar una calificación y opinión
+app.post('/calificarCurso/:id', isUser, (req, res) => {
+    const id_curso = req.params.id;
+    const id_Usuario = req.session.userId;  // Obtener el id del usuario desde la sesión
+    const { Calificacion, Detalles, Fecha } = req.body;
+
+    console.log(req.body);
+
+    // Verifica que todos los campos requeridos estén presentes
     if (!id_Usuario || !id_curso || !Calificacion || !Detalles || !Fecha) {
         return res.status(400).send('Todos los campos son obligatorios');
     }
 
-    const query = 'INSERT INTO calificaciones (id_Usuario, id_curso, Calificacion, Detalles, Fecha) VALUES (?, ?, ?, ?, ?)';
+    // Inserta la calificación en la base de datos
+    const query = 'INSERT INTO calificaciones (id_usuario, id_curso, calificacion, detalles, fecha) VALUES (?, ?, ?, ?, ?)';
     db.query(query, [id_Usuario, id_curso, Calificacion, Detalles, Fecha], (err, resultados) => {
         if (err) {
             console.error('Error al insertar la calificación:', err);
             res.status(500).send('Error interno del servidor');
             return;
         }
-        res.status(201).send('Calificación agregada correctamente');
+        res.redirect('/perfil');  // Redirige al perfil del usuario después de calificar
     });
 });
+
+
 
 //siempre debe ir al final 
 
