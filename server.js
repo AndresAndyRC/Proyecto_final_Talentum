@@ -449,19 +449,6 @@ app.put('/actualizarcurso/:id', isAdmin, (req, res) => {
     });
 });
 
-
-
-/*// Ruta para editar un curso
-app.post('/editarcurso/:id', (req, res) => {
-    const { id } = req.params;
-    const { nombre_curso, URL_curso, duracion, valor, institucion } = req.body;
-    Curso.findByIdAndUpdate(id, {nombre_curso, URL_curso, duracion, valor, institucion}, { new: true }, (err, cursoActualizado) => {
-         if (err) {
-            return res.status(500).send('Error al actualizar el curso');
-        }
-        res.redirect('/adminCursos'); 
-    });
-});*/
    
 //Eliminar un curso
 app.delete('/eliminarCurso/:id', isAdmin, (req, res) => {
@@ -567,15 +554,6 @@ let cursos = [
     }
 ];
 
-// Configuración para manejar datos POST
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-// Servir archivos estáticos (CSS, JS, imágenes)
-app.use(express.static(path.join(__dirname, 'public')));
-
-// EJS como motor de plantillas
-app.set('view engine', 'ejs');
 
 // Ruta para mostrar un curso
 app.get('/curso/:id', (req, res) => {
