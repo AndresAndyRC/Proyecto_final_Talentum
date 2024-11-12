@@ -47,7 +47,7 @@
             </div>
             <div class="card-body">
                 <!-- Formulario para agregar un curso -->
-                <form id="formularioeditarCurso" action="/actualizarcurso/<%= curso.id %>_method=PUT" method="POST">
+                <form id="formularioeditarCurso" action="/actualizarcurso/<%= curso.id %>?_method=PUT" method="POST">
                     <div class="mb-3">
                         <label for="Titulo_Curso" class="form-label">Título del Curso</label>
                         <input type="text" class="form-control" id="Titulo_Curso" name="nombre_curso"  value="<%= curso.nombre_curso %>" required>
