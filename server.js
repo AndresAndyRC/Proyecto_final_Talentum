@@ -506,7 +506,6 @@ app.get('/calificar/:id', isUser, (req, res) => {
 
 // Ruta para agregar una calificación y opinión
 app.post('/calificarCurso/:id', isUser, (req, res) => {
-    console.log(req.body);
     const id_curso = req.params.id;
     const id_Usuario = req.session.userId;  // Obtener el id del usuario desde la sesión
     const { Calificacion, Detalles, Fecha } = req.body;
