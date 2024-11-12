@@ -485,7 +485,7 @@ app.get('/info_cursos/:id', isUser, (req, res) => {
 
 // carga la vista de calificar con el id del curso 
 
-app.get('/calificar/:id', (req, res) => {
+app.get('/calificar/:id', isUser, (req, res) => {
     const id_curso = req.params.id;
     const query = 'SELECT * FROM cursos WHERE id = ?';
 
@@ -526,8 +526,6 @@ app.post('/calificarCurso/:id', isUser, (req, res) => {
         res.redirect('/perfil');  // Redirige al perfil del usuario después de calificar
     });
 });
-
-
 
 //siempre debe ir al final 
 
