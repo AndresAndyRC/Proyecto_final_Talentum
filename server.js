@@ -1,5 +1,7 @@
 // Inicialización express
 const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path'); 
 
 // Inicialización de la app 
 // (la función express() crea una nueva instancia de un objeto express)
