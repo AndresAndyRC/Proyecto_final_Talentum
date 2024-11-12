@@ -451,6 +451,111 @@ app.get('/info_cursos/:id', isUser, (req, res) => {
 
 
 
+// Ruta para obtener los cursos y sus calificaciones
+app.get('/cursos', (req, res) => {
+    db.query('SELECT * FROM cursos', (err, cursos) => {
+        if (err) {
+            console.error('Error al recuperar los cursos:', err);
+            res.status(500).send('Error interno del servidor');
+            return;
+        }
+        
+        // Obtener las calificaciones y opiniones para cada curso
+        const cursoPromises = cursos.map(curso => {
+            return new Promise((resolve, reject) => {
+                db.query('SELECT * FROM calificaciones WHERE id_curso = ?', [curso.id], (err, calificaciones) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        curso.calificaciones = calificaciones;
+                        resolve(curso);
+                    }
+                });
+            });
+        });
+
+        Promise.all(cursoPromises)
+            .then(resultados => {
+                res.json(resultados);
+            })
+            .catch(err => {
+                console.error('Error al recuperar las calificaciones:', err);
+                res.status(500).send('Error interno del servidor');
+            });
+    });
+});
+
+// Ruta para agregar una calificación y opinión
+app.post('/calificaciones', (req, res) => {
+    const { id_Usuario, id_curso, Calificacion, Detalles, Fecha } = req.body;
+
+    if (!id_Usuario || !id_curso || !Calificacion || !Detalles || !Fecha) {
+        return res.status(400).send('Todos los campos son obligatorios');
+    }
+
+    const query = 'INSERT INTO calificaciones (id_Usuario, id_curso, Calificacion, Detalles, Fecha) VALUES (?, ?, ?, ?, ?)';
+    db.query(query, [id_Usuario, id_curso, Calificacion, Detalles, Fecha], (err, resultados) => {
+        if (err) {
+            console.error('Error al insertar la calificación:', err);
+            res.status(500).send('Error interno del servidor');
+            return;
+        }
+        res.status(201).send('Calificación agregada correctamente');
+    });
+});
+
+// Usamos un "database" en memoria (cualquier base de datos real)
+let cursos = [
+    {
+        id: 1,
+        nombre_curso: 'Curso de Node.js',
+        duracion: '3 meses',
+        valor: 300,
+        institucion: 'Talentum Academy',
+        URL_curso: 'http://example.com',
+        comentarios: [
+            { usuario: 'Juan', texto: 'Excelente curso, lo recomiendo mucho.' },
+            { usuario: 'Ana', texto: 'Muy completo, me ayudó a mejorar mis habilidades.' }
+        ]
+    }
+];
+
+// Configuración para manejar datos POST
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// Servir archivos estáticos (CSS, JS, imágenes)
+app.use(express.static(path.join(__dirname, 'public')));
+
+// EJS como motor de plantillas
+app.set('view engine', 'ejs');
+
+// Ruta para mostrar un curso
+app.get('/curso/:id', (req, res) => {
+    const cursoId = req.params.id;
+    const curso = cursos.find(c => c.id == cursoId);
+    if (curso) {
+        res.render('curso', { curso: curso, comentarios: curso.comentarios });
+    } else {
+        res.status(404).send('Curso no encontrado');
+    }
+});
+
+// Ruta para enviar una opinión
+app.post('/curso/:id/opinar', (req, res) => {
+    const cursoId = req.params.id;
+    const texto = req.body.opinion;
+
+    const curso = cursos.find(c => c.id == cursoId);
+    if (curso) {
+        // Simular un usuario (se puede modificar para que sea dinámico)
+        const nuevoComentario = { usuario: 'Usuario Anónimo', texto: texto };
+        curso.comentarios.push(nuevoComentario);
+        res.redirect(`/curso/${cursoId}`);
+    } else {
+        res.status(404).send('Curso no encontrado');
+    }
+});
 
 
 
@@ -475,6 +580,8 @@ app.get('/logout', (req, res) => {
         res.status(500).send('Error al procesar la solicitud');
     }
 });
+
+
 
 // Inicialización del servidor
 
