@@ -504,8 +504,6 @@ app.get('/calificar/:id', (req, res) => {
     });
 });
 
-
-// Ruta para agregar una calificación y opinión
 // Ruta para agregar una calificación y opinión
 app.post('/calificarCurso/:id', isUser, (req, res) => {
     const id_curso = req.params.id;
