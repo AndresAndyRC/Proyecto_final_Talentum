@@ -26,7 +26,7 @@
             <div class="row align-items-center">
                 <div class="col-md-2 text-center">
                     <div class="logo-container">
-                        <img src="../images/Logo.png" alt="Logo" class="logo" height="auto" width="100px">
+                        <img src="/resources/img/Logo.png"alt="Logo" class="logo" height="auto" width="100px">
                     </div>
                 </div>
                 <div class="col-md-8 text-center">
@@ -47,35 +47,37 @@
             </div>
             <div class="card-body">
                 <!-- Formulario para agregar un curso -->
-                <form id="formularioCurso" method="POST" action="admin">
-                    <div class="mb-3">
+                <form id="formularioeditarCurso" action="/editarcurso/<%= curso.id %>" method="PUT">
+                    <form action="/eliminarCurso/<%= curso.id %>?_method=DELETE" method="POST">
+
                         <label for="Titulo_Curso" class="form-label">Título del Curso</label>
-                        <input type="text" class="form-control" id="Titulo_Curso" name="nombre_curso" required>
+                        <input type="text" class="form-control" id="Titulo_Curso" name="nombre_curso"  value="<%= curso.nombre_curso %>" required>
                     </div>
                                 
                     <div class="mb-3">
                         <label for="Url_Curso" class="form-label">Ruta Web</label>
-                        <input type="url" class="form-control" id="Url_Curso" name="URL_curso" required>
+                        <input type="url" class="form-control" id="Url_Curso" name="URL_curso"  value="<%= curso.URL_curso %>" required>
                     </div>
                     
                     <div class="mb-3">
                         <label for="duracion_Curso" class="form-label">Duración del Curso</label>
-                        <input type="number" class="form-control" id="duracion_Curso" name="duracion" required>
+                        <input type="number" class="form-control" id="duracion_Curso" name="duracion"  value="<%= curso.duracion %>" required>
                     </div>
                     
                     <div class="mb-3">
                         <label for="valor_Curso" class="form-label">Valor</label>
-                        <input type="number" class="form-control" id="valor_Curso" name="valor" required>
+                        <input type="number" class="form-control" id="valor_Curso" name="valor"  value="<%= curso.valor%>" required>
                     </div>
                     
                     <div class="mb-3">
                         <label for="institucion" class="form-label">Institución</label>
-                        <input type="text" class="form-control" id="institucion" name="institucion" required>
+                        <input type="text" class="form-control" id="institucion" name="institucion" value="<%= curso.institucion %>" required>
                     </div>
-                    
-                    <button type="submit" class="btn btn-primary">Agregar Curso</button>
+                    </form>
                     
                 </form>
+                    <button type="submit" class="btn btn-primary">Editar Curso</button>
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este curso?')">Eliminar</button>
                 
                 <hr>
                 
