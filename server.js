@@ -506,12 +506,10 @@ app.get('/calificar/:id', (req, res) => {
 
 // Ruta para agregar una calificación y opinión
 app.post('/calificarCurso/:id', isUser, (req, res) => {
+    console.log(req.body);
     const id_curso = req.params.id;
     const id_Usuario = req.session.userId;  // Obtener el id del usuario desde la sesión
     const { Calificacion, Detalles, Fecha } = req.body;
-
-    console.log(req.body);
-
     // Verifica que todos los campos requeridos estén presentes
     if (!id_Usuario || !id_curso || !Calificacion || !Detalles || !Fecha) {
         return res.status(400).send('Todos los campos son obligatorios');
