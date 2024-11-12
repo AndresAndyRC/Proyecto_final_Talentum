@@ -433,9 +433,8 @@ app.get('/editarcurso/:id', isAdmin, (req, res) => {
 
 // Actualizar un curso
 app.put('/actualizarcurso/:id', isAdmin, (req, res) => {
-    const { id } = req.params;
     const { nombre_curso, URL_curso, duracion, valor, institucion } = req.body;
-    
+    const { id } = req.params;
     // Consulta para actualizar el curso
     const query = `UPDATE cursos SET nombre_curso = ?, URL_curso = ?, duracion = ?, valor = ?, institucion = ? WHERE id = ?`;
     db.query(query, [nombre_curso, URL_curso, duracion, valor, institucion, id], (error, results) => {
