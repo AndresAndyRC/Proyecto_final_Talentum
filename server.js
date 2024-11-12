@@ -386,7 +386,6 @@ app.get('/adminCursos', isAdmin, (req, res) => {
             console.error('Error al obtener los cursos:', error);
             return res.status(500).send('Error al cargar los cursos');
         }
-
         console.log("Resultados de la consulta a cursos:", results);
         console.log("Tipo de results:", typeof results);
         console.log("¿Results es array?", Array.isArray(results));
@@ -414,19 +413,62 @@ app.post('/admin', isAdmin , (req, res) => {
         res.redirect('/admin');
     });
 });
-
-// eliminar el curso
-
-app.get('/eliminarCurso/:id', isUser, (req, res) => {
+// Ruta GET para editar un curso
+app.get('/editarcurso/:id', isAdmin, (req, res) => {
     const { id } = req.params;
-    const query = 'DELETE FROM cursos WHERE id =?';
-    db.query(query, [id], (error, result) => {
+    // Consulta para obtener el curso por su ID
+    const query = 'SELECT * FROM cursos WHERE id = ?';
+    db.query(query, [id], (error, results) => {
         if (error) {
-            res.status(500).send('Error al eliminar el curso');
-            return;
+            console.error('Error al obtener los datos del curso:', error);
+            return res.status(500).send('Error al obtener los datos del curso');
         }
-        // Redirigir al perfil después de eliminar el curso
+        if (results.length === 0) {
+            return res.status(404).send('Curso no encontrado');
+        }
+        const curso = results[0]; // Obtener el primer curso de la consulta
+        res.render('editarCurso', { curso }); // Renderizar el formulario con los datos del curso
+    });
+});
+//editar un curso
+app.put('/editarcurso/:id', isAdmin, (req, res) => {
+    const { id } = req.params;
+    const { nombre_curso, descripcion, duracion, precio, institucion, url_curso } = req.body;  
+    const query = `UPDATE cursos SET nombre_curso = ?, descripcion = ?, duracion = ?, precio = ?, institucion = ?, url_curso = ? WHERE id = ?`;
+    db.query(query, [nombre_curso, descripcion, duracion, precio, institucion, url_curso, id], (error, results) => {
+        if (error) {
+            console.error('Error al actualizar el curso:', error);
+            return res.status(500).send('Error al actualizar el curso');
+        }
+        //redirigir al listado de cursos
         res.redirect('/adminCursos');
+           // Renderizar el formulario con los datos del curso
+           res.render('editarCurso', {
+            curso: result[0] // Pasa el curso para prellenar los campos
+        });
+    });
+});
+
+//Eliminar un curso
+app.delete('/eliminarCurso/:id', isAdmin, (req, res) => {
+    const { id } = req.params;
+    // Verificar si el curso existe antes de intentar eliminarlo
+    const checkQuery = 'SELECT * FROM cursos WHERE id = ?';
+    db.query(checkQuery, [id], (checkError, checkResult) => {
+        if (checkError) {
+            console.error('Error al comprobar la existencia del curso:', checkError);
+            return res.status(500).send('Error al verificar el curso');
+        }
+        // Si el curso existe eliminarlo
+        const query = 'DELETE FROM cursos WHERE id = ?';
+        db.query(query, [id], (error, result) => {
+            if (error) {
+                console.error('Error al eliminar el curso:', error);
+                return res.status(500).send('Error al eliminar el curso');
+            }
+            // Redirigir 
+            res.redirect('/adminCursos');
+        });
     });
 });
 
