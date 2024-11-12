@@ -47,9 +47,8 @@
             </div>
             <div class="card-body">
                 <!-- Formulario para agregar un curso -->
-                <form id="formularioeditarCurso" action="/editarcurso/<%= curso.id %>" method="PUT">
-                    <form action="/eliminarCurso/<%= curso.id %>?_method=DELETE" method="POST">
-
+                <form id="formularioeditarCurso" action="/actualizarcurso/<%= curso.id %>_method=PUT" method="POST">
+                    <div class="mb-3">
                         <label for="Titulo_Curso" class="form-label">Título del Curso</label>
                         <input type="text" class="form-control" id="Titulo_Curso" name="nombre_curso"  value="<%= curso.nombre_curso %>" required>
                     </div>
@@ -77,11 +76,12 @@
                     
                 </form>
                     <button type="submit" class="btn btn-primary">Editar Curso</button>
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este curso?')">Eliminar</button>
+                    
                 
                 <hr>
                 
-                <button class="btn btn"><a href="adminCursos">Ver Cursos</a></button>
+                <a href="/adminCursos" class="btn btn-secondary">Ver Cursos</a>
+
                 
             </div>
         </div>
