@@ -177,7 +177,6 @@ app.get('/registrar', (req, res) => {
     res.render('registrar');
 });
 
-
 // ---------------Api para manejar el registro  ----------------------------------
 
 //ruta de registro
