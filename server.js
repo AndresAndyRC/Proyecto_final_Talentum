@@ -181,16 +181,23 @@ app.get('/registrar', (req, res) => {
 
 //ruta de registro
 app.post('/registrar', async (req, res) => {
-    //console.log(req.body); //muestra los datos enviados en consola a traves de un JSON para confirmar valores
     const { nombres, apellidos, email, telefono, nickname, contraseña, fecha_creacion, rol_id } = req.body;
-    let pass = await bcryptjs.hash(contraseña, 8); //encripta la contraseña y la guarda en pass la cual registramos en la bd 
+    let pass = await bcryptjs.hash(contraseña, 8);
     const sql = 'INSERT INTO usuarios (nombres, apellidos, email, telefono, nickname, contraseña, fecha_creacion, rol_id ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+
     db.query(sql, [nombres, apellidos, email, telefono, nickname, pass, fecha_creacion, rol_id], (error, result) => {
         if (error) {
             res.status(500).send('Error al crear usuario');
             return;
         }
-        res.redirect('/');
+
+        // Enviar una respuesta con un script que muestra una alerta y redirige
+        res.send(`
+            <script>
+                alert('Usuario registrado exitosamente');
+                window.location.href = '/';
+            </script>
+        `);
     });
 });
 
@@ -505,7 +512,6 @@ app.get('/calificar/:id', isUser, (req, res) => {
 
 // Ruta para agregar una calificación y opinión
 app.post('/calificarCurso/:id', isUser, (req, res) => {
-    console.log(req.body);
     const id_curso = req.params.id;
     const id_Usuario = req.session.userId;  // Obtener el id del usuario desde la sesión
     const { Calificacion, Detalles, Fecha } = req.body;
