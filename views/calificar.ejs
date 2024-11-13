@@ -49,9 +49,6 @@
                             <a class="nav-link active" aria-current="page" href="/logout"><i class="bi bi-box-arrow-right"></i></a>
                         </li>
                     </ul>
-                    <span class="navbar-text bienvenida">
-                        <!-- Puedes añadir un mensaje de bienvenida aquí -->
-                    </span>
                 </div>
             </div>
         </nav>
@@ -62,11 +59,11 @@
             <input type="hidden" name="id_curso" value="<%= curso.id %>">
             <div class="mb-3">
                 <label for="Calificacion" class="form-label">Calificación</label>
-                <input type="number" id="Calificacion" name="Calificacion" min="1" max="5" class="form-control" required>
+                <input type="number" id="Calificacion" name="Calificacion" min="1" max="5" class="form-control" placeholder="Califica el curso de 1 a 5" required>
             </div>
             <div class="mb-3">
                 <label for="Detalles" class="form-label">Detalles</label>
-                <textarea id="Detalles" name="Detalles" class="form-control" required></textarea>
+                <textarea id="Detalles" name="Detalles" class="form-control" placeholder="Danos tu opinión sobre el curso" maxlength="250" required></textarea>
             </div>
             <div class="mb-3">
                 <input value="" type="date" class="form-control" id="fecha_creacion" name="Fecha" hidden>
