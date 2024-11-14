@@ -12,6 +12,11 @@
     transition: transform 0.3s ease, background 0.3s ease; /* Transiciones suaves */
 }
 
+/* Añade un margen inferior para separar las tarjetas */
+.curso-izquierda .card, .curso-derecha .card {
+    margin-bottom: 20px; 
+}
+
 /* Efecto al pasar el ratón por encima */
 .curso .card button:hover {
     background: linear-gradient(45deg, #d47336, #764323); /* Gradiente invertido al pasar el ratón */
