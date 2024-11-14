@@ -148,3 +148,33 @@ body::after {
 #email-section {
   margin-top: 30px; /* Aumenta este valor para más espacio */
 }
+
+.titulo_bienvenida {
+  font-size: 50px;
+  text-align: center;
+  font-size: 3em;
+  font-family: 'Faculty Glyphic', sans-serif;
+  position: relative;
+  overflow: hidden; /* Para asegurar que el texto que se mueve fuera del área visible no se vea */
+}
+
+#welcome-text {
+  display: inline-block;
+  animation: barril-up 3s ease-in-out infinite; /* Aplicar animación continua hacia arriba */
+}
+
+/* Animación para el efecto de barril hacia arriba */
+@keyframes barril-up {
+  0% {
+      transform: translateY(100%); /* Empieza desde fuera de la pantalla por debajo */
+      opacity: 0; /* Inicialmente invisible */
+  }
+  25% {
+      transform: translateY(0); /* Se detiene en la posición visible */
+      opacity: 1; /* Totalmente visible */
+  }
+  100% {
+      transform: translateY(-100%); /* Mueve el texto completamente hacia arriba fuera de la pantalla */
+      opacity: 0; /* Desaparece mientras sube */
+  }
+}

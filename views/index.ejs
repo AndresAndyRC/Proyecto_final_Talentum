@@ -16,25 +16,27 @@
     <link rel="stylesheet" href="/resources/css/style.css">
 </head>
 <body>
-    <!-- Título principal fuera del cuadro de inicio de sesión -->
-    <h1 class="titulo_bienvenida">Te damos la bienvenida a Talentum</h1>
+    <!-- titulo principal fuera del cuadro de inicio de sesion -->
+    <h1 class="titulo_bienvenida">
+        <span id="welcome-text">Bienvenido a</span> Talentum
+    </h1>
   
     <div class="inicio">
       <form class="inicioSesion" method="POST" action="index">
         <h4 class="titulo_pag">INICIAR SESIÓN</h4>
-        <!-- Sección de correo -->
+        <!-- sección de correo -->
         <div class="mb-3" id="email-section">
           <label for="email" class="form-label">Correo Electrónico</label>
           <input type="email" class="form-control" id="email" name="email" required>
         </div>
-        <!-- Sección de contraseña -->
+        <!-- sección de contraseña -->
         <div class="mb-3 hidden" id="password-section">
           <label for="contraseña" class="form-label">Contraseña</label>
           <input type="password" class="form-control" id="contraseña" name="contraseña" required>
         </div>
-        <!-- Botón -->
+        <!-- boton -->
         <button type="button" class="btn btn-primary botones" id="continue-button">Continuar</button>
-        <!-- Enlace para registrarse -->
+        <!-- enlace para registrarse -->
         <div class="registro">
           <p>¿No tienes una cuenta?</p>
           <a href="registrar" class="registrar">Regístrate ahora</a>
@@ -48,20 +50,35 @@
             const emailSection = document.getElementById('email-section');
             const passwordSection = document.getElementById('password-section');
             const continueButton = document.getElementById('continue-button');
-    
+
             // Verificar si el campo de contraseña está oculto
             if (passwordSection.classList.contains('hidden')) {
                 // Mostrar el campo de contraseña y ocultar el de correo
                 passwordSection.classList.remove('hidden');
                 emailSection.classList.add('hidden');
-    
-                // Cambiar el texto del botón a "Ingresar"
+
+                // cambiar el texto del botón a "Ingresar"
                 continueButton.textContent = 'Ingresar';
             } else {
-                // Aquí puedes enviar el formulario o manejar la lógica para el ingreso
+                // lógica para el ingreso
                 document.querySelector('.inicioSesion').submit();
             }
         });
+
+        const welcomeText = document.getElementById("welcome-text");
+
+        const phrases = ["Welcome to", "Bienvenue à", "Willkommen in", "Bienvenuto a", "Bienvenidos a"];
+        let currentIndex = 0;
+
+        function changeText() {
+            welcomeText.textContent = phrases[currentIndex];
+            currentIndex = (currentIndex + 1) % phrases.length;  // Cambia al siguiente índice
+        }
+
+        setInterval(changeText, 3000); // cambia cada 3 segundos
+
+
+
     </script>   
 </body>
 </html>
