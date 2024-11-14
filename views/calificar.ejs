@@ -72,9 +72,18 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Guardar Calificación</button>
                 <a href="/perfil" class="btn btn-secondary">Cancelar</a>
-            </form>  
+            </form>
+
+            <!-- Sección para mostrar calificaciones anteriores -->
+            <div class="mt-5">
+                <h2>Calificaciones Anteriores</h2>
+                <div id="calificacionesContainer">
+                    <!-- Las calificaciones se mostrarán aquí -->
+                </div>
+            </div>
         </div>
     </main>
+
     <!-- Footer -->
     <footer class="bg-dark text-white text-center py-3 mt-4">
         <div class="container">
@@ -91,6 +100,30 @@
         const formattedDate = today.toISOString().split('T')[0];
         // Asignar la fecha formateada al campo de entrada
         document.getElementById('fecha_creacion').value = formattedDate;
+
+        // Función para obtener las calificaciones anteriores
+        async function obtenerCalificaciones() {
+            const cursoId = '<%= curso.id %>';
+            const response = await fetch(`/calificacionesCurso/${cursoId}`);
+            const calificaciones = await response.json();
+
+            const container = document.getElementById('calificacionesContainer');
+            calificaciones.forEach(calificacion => {
+                const card = document.createElement('div');
+                card.className = 'card mb-3';
+                card.innerHTML = `
+                    <div class="card-body">
+                        <h5 class="card-title">Calificación: ${calificacion.calificacion} de 5</h5>
+                        <p class="card-text">${calificacion.detalles}</p>
+                        <p class="card-text"><small class="text-muted">Fecha: ${new Date(calificacion.fecha).toLocaleDateString()}</small></p>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Llamar a la función para obtener y mostrar las calificaciones cuando la página se carga
+        obtenerCalificaciones();
     </script>    
 </body>
 </html>
