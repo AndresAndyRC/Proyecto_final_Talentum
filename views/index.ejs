@@ -16,28 +16,52 @@
     <link rel="stylesheet" href="/resources/css/style.css">
 </head>
 <body>
+    <!-- Título principal fuera del cuadro de inicio de sesión -->
     <h1 class="titulo_bienvenida">Te damos la bienvenida a Talentum</h1>
+  
     <div class="inicio">
-        <form class="inicioSesion" method="POST" action="index">
-            <h4 class="titulo_pag">INICIAR SESIÓN</h4>
-            <!-- seccion de correo -->
-            <div class="mb-3">
-                <label for="email" class="form-label">Correo Electrónico</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-            <!-- seccion de contraseña -->
-            <div class="mb-3">
-                <label for="contraseña" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="contraseña" name="contraseña" required>
-            </div>
-            <!-- boton -->
-            <button type="submit" class="btn btn-primary botones">Ingresar</button>
-            <!-- enlace para registarse  -->
-            <div class="registro">
-                <p>¿No tienes una cuenta?</p>
-                <a href="registrar" class="registrar">Regístrate ahora</a>
-            </div> 
-        </form>
+      <form class="inicioSesion" method="POST" action="index">
+        <h4 class="titulo_pag">INICIAR SESIÓN</h4>
+        <!-- Sección de correo -->
+        <div class="mb-3" id="email-section">
+          <label for="email" class="form-label">Correo Electrónico</label>
+          <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <!-- Sección de contraseña -->
+        <div class="mb-3 hidden" id="password-section">
+          <label for="contraseña" class="form-label">Contraseña</label>
+          <input type="password" class="form-control" id="contraseña" name="contraseña" required>
+        </div>
+        <!-- Botón -->
+        <button type="button" class="btn btn-primary botones" id="continue-button">Continuar</button>
+        <!-- Enlace para registrarse -->
+        <div class="registro">
+          <p>¿No tienes una cuenta?</p>
+          <a href="registrar" class="registrar">Regístrate ahora</a>
+        </div>
+      </form>
     </div>
+    
+    <script>
+        document.getElementById('continue-button').addEventListener('click', function() {
+            // Obtener secciones y elementos
+            const emailSection = document.getElementById('email-section');
+            const passwordSection = document.getElementById('password-section');
+            const continueButton = document.getElementById('continue-button');
+    
+            // Verificar si el campo de contraseña está oculto
+            if (passwordSection.classList.contains('hidden')) {
+                // Mostrar el campo de contraseña y ocultar el de correo
+                passwordSection.classList.remove('hidden');
+                emailSection.classList.add('hidden');
+    
+                // Cambiar el texto del botón a "Ingresar"
+                continueButton.textContent = 'Ingresar';
+            } else {
+                // Aquí puedes enviar el formulario o manejar la lógica para el ingreso
+                document.querySelector('.inicioSesion').submit();
+            }
+        });
+    </script>   
 </body>
 </html>
