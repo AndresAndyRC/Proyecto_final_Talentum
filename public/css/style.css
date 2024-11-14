@@ -5,130 +5,81 @@
   box-sizing: border-box;
 }
 /* reset de CSS fin */
+/* inicio de estilos sección index.html */
 
-<<<<<<< HEAD
 body{
   font-family: 'Faculty Glyphic', sans-serif;
-    padding: 20px;
+  padding: 20px;
 }
 /* fin de estilos  index.html*/
-=======
-/* left */
->>>>>>> 682523ac27ab08fce4ab8dfcb278126421d4564b
 
-.left {
-  float: left; /*alinea a la izquierda el div */
-  width: 40%; /* ancho de div*/
-  height: 100vh;  /* ocupa el 100% de altura de la pantalla */
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('../img/bg.jpg'); /* crea un degradado sobre la imagen */
-  background-size: cover; /* ocupa el espacio designado*/
-  background-position: center; /*centra la imagen*/
-  background-repeat: no-repeat; /*no se repite*/
+/* seccion tiutlo */
+
+.titulo_bienvenida{
+font-size: 40px;
+text-align: center;
+padding: 50px;
 }
 
-/* right */
+/* sección inicio */
 
-.right {
-  float: right; /* alinea a la derecha el div */
-  width: 60%; /* ancho de div*/
-  height: 100vh;  /* ocupa el 100% de altura de la pantalla */
-  background-color: #f3f3f3; /* color de fondo */
-  padding: 30px; /* margen interno */
+.inicio{
+background-color: #fdfdfd;
+margin: auto;
+width: 350px;
+text-align: center;
+padding: 50px;
+border-radius: 5px;
+box-shadow: 5px 5px 0 #cccccc6b;
+border: solid 1px #cccccc;
 }
 
-/* titulo */
+/* sección resgitro */
 
-.titulo_bienvenida {
-  text-align: center; /* alinea el texto al centro */
-  color: #000000; /* color de texto */
-  font-size: 40px; /* tamaño de fuente */
-  margin-bottom: 50px; /* margen inferior */
+.registro_div{
+background-color: #fdfdfd;
+margin: auto;
+width: 350px;
+text-align: center;
+padding: 25px;
+border-radius: 5px;
+box-shadow: 5px 5px 0 #cccccc6b;
+border: solid 1px #cccccc;
 }
 
-/*form*/
+/* seccion de p inicio  */
 
-.inicioSesion, .IniRegistrar {
-  background-color: #ffffff;
-  padding: 10px 40px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.178);
-  width: 400px;
-  max-width: 90%;
-  margin: auto;
+.titulo_pag{
+font-weight: bold;
+}
+/* seccion boton */
+
+.botones{
+margin-bottom: 10px;
 }
 
-.titulo_pag {
-  text-align: center;
-  color: #000000;
-  font-size: 20px;
-  margin-top: 10px;
-  margin-bottom: 15px;
-}
-
-.campo {
-  margin-bottom: 16px;
-}
-
-.label_inicio {
-  display: block;
-  font-weight: bold;
-  color: #000000;
-  margin-bottom: 5px;
-}
-
-.input_inicio {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 16px;
-  color: #5e5e5e;
-}
-
-.input_inicio::placeholder {
-  color: #cde8ff;
-}
-
-.input_inicio:focus {
-  outline: none;
-  border-color: #7da0ff;
-  box-shadow: 0 0 0 1.5px #4778ff;
-}
-
-.btn_inicio {
-  width: 100%;
-  padding: 10px;
-  background-color: #6790ff;
-  border: none;
-  border-radius: 5px;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s;
-}
-
-.btn_inicio:hover {
-  background-color: #4778ff;
-}
-
-.registro {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 14px;
-}
-
-.registro p {
-  margin: 0;
-  color: #666;
-}
-
-.registrar {
-  color: #4778ff;
-  text-decoration: none;
+/* seccion de label*/
+.divInicio label{ 
+  font-size: 15px;
+  margin-bottom: 2px;
   font-weight: bold;
 }
 
-.registrar:hover {
-  text-decoration: underline;
+/* seccion de input*/
+.divInicio input{ 
+  font-size: 15px;
+  height: 34px;
+}
+
+html, body {
+height: 100%;
+margin: 0;
+}
+
+main {
+flex: 1;
+}
+
+footer {
+margin-top: auto;
 }
