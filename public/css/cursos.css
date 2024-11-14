@@ -1,3 +1,125 @@
+/* Estilos generales */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilos del header y navegación */
+.navbar {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bienvenida {
+    font-weight: 500;
+    color: #fff;
+}
+
+/* Configuración del logo */
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.logo {
+    width: 100px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+/* Estilos de las cards */
+.card {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+    object-fit: cover;
+    height: 250px;
+}
+
+/* Estilos para las estrellas de calificación */
+.stars {
+    color: #ffc107;
+    font-size: 1.25rem;
+    letter-spacing: 2px;
+}
+
+/* Estilos para los botones */
+.btn-primary {
+    padding: 0.5rem 2rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+    .card-img-top {
+        height: 200px;
+    }
+    
+    .logo {
+        width: 80px;
+    }
+    
+    .curso {
+        margin-top: 1rem;
+    }
+}
+
+/* Mejoras de accesibilidad */
+:focus {
+    outline: 3px solid #0d6efd;
+    outline-offset: 2px;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.curso {
+    animation: fadeIn 0.5s ease-out;
+}
+
+main {
+    flex: 1;
+}
+
+
+////////////////////
+
+
 /* Estilos generales para los botones "Ver" */
 .curso .card button {
     padding: 12px 24px;
@@ -51,17 +173,4 @@
 html, body {
     height: 100%;
     margin: 0;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-}
-
-main {
-    flex: 1;
-}
-
-footer {
-    margin-top: auto;
 }
