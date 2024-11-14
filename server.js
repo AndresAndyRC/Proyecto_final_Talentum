@@ -536,9 +536,9 @@ app.post('/calificarCurso/:id', isUser, (req, res) => {
 app.get('/calificacionesCurso/:id', isUser, (req, res) => {
     const id_curso = req.params.id;
     
-    // Consulta para obtener las calificaciones del curso junto con el correo electrónico del usuario
+    // Consulta para obtener las calificaciones del curso junto con el nickname del usuario
     const query = `
-        SELECT c.calificacion, c.detalles, c.fecha, u.email 
+        SELECT c.calificacion, c.detalles, c.fecha, u.nickname 
         FROM calificaciones c 
         JOIN usuarios u ON c.id_usuario = u.id 
         WHERE c.id_curso = ?`;
@@ -551,6 +551,7 @@ app.get('/calificacionesCurso/:id', isUser, (req, res) => {
         res.json(resultados);
     });
 });
+
 
 
 
