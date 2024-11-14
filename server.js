@@ -536,8 +536,12 @@ app.post('/calificarCurso/:id', isUser, (req, res) => {
 app.get('/calificacionesCurso/:id', isUser, (req, res) => {
     const id_curso = req.params.id;
     
-    // Consulta para obtener las calificaciones del curso
-    const query = 'SELECT calificacion, detalles, fecha FROM calificaciones WHERE id_curso = ?';
+    // Consulta para obtener las calificaciones del curso junto con el correo electrónico del usuario
+    const query = `
+        SELECT c.calificacion, c.detalles, c.fecha, u.email 
+        FROM calificaciones c 
+        JOIN usuarios u ON c.id_usuario = u.id 
+        WHERE c.id_curso = ?`;
     db.query(query, [id_curso], (err, resultados) => {
         if (err) {
             console.error('Error al obtener las calificaciones:', err);
@@ -547,6 +551,8 @@ app.get('/calificacionesCurso/:id', isUser, (req, res) => {
         res.json(resultados);
     });
 });
+
+
 
 
 //siempre debe ir al final 
