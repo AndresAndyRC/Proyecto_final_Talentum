@@ -532,6 +532,23 @@ app.post('/calificarCurso/:id', isUser, (req, res) => {
     });
 });
 
+// Ruta para obtener las calificaciones de un curso
+app.get('/calificacionesCurso/:id', isUser, (req, res) => {
+    const id_curso = req.params.id;
+    
+    // Consulta para obtener las calificaciones del curso
+    const query = 'SELECT calificacion, detalles, fecha FROM calificaciones WHERE id_curso = ?';
+    db.query(query, [id_curso], (err, resultados) => {
+        if (err) {
+            console.error('Error al obtener las calificaciones:', err);
+            res.status(500).send('Error interno del servidor');
+            return;
+        }
+        res.json(resultados);
+    });
+});
+
+
 //siempre debe ir al final 
 
 // Ruta para cerrar sesión
