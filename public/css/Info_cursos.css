@@ -1,10 +1,12 @@
 /* Estilos generales */
-body {
-    font-family: 'Segoe UI', Arial, sans-serif;
+html, body {
+    font-family: 'Faculty Glyphic', sans-serif; /* Aplicamos la fuente a toda la página */
     background-color: #f8f9fa;
     min-height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    margin: 0; /* Asegura que no haya margen por defecto */
 }
 
 /* Estilos del header y navegación */
@@ -117,9 +119,6 @@ main {
 }
 
 
-////////////////////
-
-
 /* Estilos generales para los botones "Ver" */
 .curso .card button {
     padding: 12px 24px;
@@ -170,7 +169,18 @@ main {
     color: #333;
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
+/* Ajusta el margen para dispositivos móviles */
+@media (max-width: 768px) {
+    .curso-izquierda .card-body .btn {
+        margin-left: 0 !important;  /* Elimina el margen izquierdo */
+        margin-right: 0 !important; /* Opcional, en caso de tener margen en el lado derecho */
+        margin-top: 10px;  /* Aplica un margen superior de 15px en dispositivos móviles */
+    }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .curso-izquierda .card-body .btn.btn-primary.ms-3 {
+        margin-left: 0 !important;  /* Elimina el margen izquierdo en pantallas intermedias */
+        margin-top: 10px;  /* Aplica un margen superior de 15px en dispositivos móviles */
+    }
 }
