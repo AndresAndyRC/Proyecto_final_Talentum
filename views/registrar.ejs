@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,60 +7,58 @@
     <link rel="icon" href="/resources/img/Mini_icono.png">
     <!-- titulo -->
     <title>Talentum</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Faculty+Glyphic&display=swap" rel="stylesheet">
     <!-- css -->
     <link rel="stylesheet" href="/resources/css/style.css">
 </head>
 <body>
-    <div class="cuerpo">
-        <!-- left -->
-        <div class="left"></div>
-        <!-- right -->
-        <div class="right">
-            <form class="IniRegistrar" method="POST" action="registrar">
-                <h4 class="titulo_pag">REGISTRARSE</h4>
-                <!-- seccion de nombres -->
-                <div class="campo">
-                    <label for="nombres" class="label_inicio">Nombres</label>
-                    <input type="text" class="input_inicio" id="nombres" name="nombres" pattern="[A-Za-z\s]+" title="Por favor, ingresa solo letras" required>
-                </div>
-                <!-- seccion de apellidos -->
-                <div class="campo">
-                    <label for="apellidos" class="label_inicio">Apellidos</label>
-                    <input type="text" class="input_inicio" id="apellidos" name="apellidos" pattern="[A-Za-z\s]+" title="Por favor, ingresa solo letras" required>
-                </div>
-                <!-- seccion de correo -->
-                <div class="campo">
-                    <label for="email" class="label_inicio">Correo Electrónico</label>
-                    <input type="email" class="input_inicio" id="email" name="email" required>
-                </div>
-                <!-- seccion de telefono -->
-                <div class="campo">
-                    <label for="telefono" class="label_inicio">Teléfono</label>
-                    <input type="tel" class="input_inicio" id="telefono" name="telefono" pattern="3[0-9]{9}" title="Debe comenzar con 3 y tener 10 dígitos" required>
-                </div>
-                <!-- seccion de nickname -->
-                <div class="campo">
-                    <label for="nickname" class="label_inicio">Nickname</label>
-                    <input type="text" class="input_inicio" id="nickname" name="nickname" required>
-                </div>
-                <!-- seccion de contraseña -->
-                <div class="campo">
-                    <label for="contraseña" class="label_inicio">Contraseña</label>
-                    <input type="password" class="input_inicio" id="contraseña" name="contraseña" required>
-                </div>
-                <!-- seccion de fecha de creacion -->
-                <div class="campo">
-                    <input value="" type="date" class="input_inicio" id="fecha_creacion" name="fecha_creacion" hidden>
-                </div>
-                <!-- seccion de rol -->
-                <div class="campo">
-                    <input value="2" type="number" class="input_inicio" id="rol_id" name="rol_id" hidden>
-                </div>
-                <!-- boton -->
-                <button type="submit" class="btn_inicio botones">Registrarse</button>
-            </form>
-        </div>
+    <div class="inicio">
+        <form class="IniRegistrar" method="POST" action="registrar">
+            <h4 class="titulo_pag">REGISTRARSE</h4>
+            <!-- Sección de nombres -->
+            <div class="campo">
+                <label for="nombres" class="label_inicio">Nombres</label>
+                <input type="text" class="form-control" id="nombres" name="nombres" pattern="[A-Za-z\s]+" title="Por favor, ingresa solo letras" required>
+            </div>
+            <!-- Sección de apellidos -->
+            <div class="campo">
+                <label for="apellidos" class="label_inicio">Apellidos</label>
+                <input type="text" class="form-control" id="apellidos" name="apellidos" pattern="[A-Za-z\s]+" title="Por favor, ingresa solo letras" required>
+            </div>
+            <!-- Sección de correo -->
+            <div class="campo">
+                <label for="email" class="label_inicio">Correo Electrónico</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <!-- Sección de teléfono -->
+            <div class="campo">
+                <label for="telefono" class="label_inicio">Teléfono</label>
+                <input type="tel" class="form-control" id="telefono" name="telefono" pattern="3[0-9]{9}" title="Debe comenzar con 3 y tener 10 dígitos" required>
+            </div>
+            <!-- Sección de nickname -->
+            <div class="campo">
+                <label for="nickname" class="label_inicio">Nickname</label>
+                <input type="text" class="form-control" id="nickname" name="nickname" required>
+            </div>
+            <!-- Sección de contraseña -->
+            <div class="campo">
+                <label for="contraseña" class="label_inicio">Contraseña</label>
+                <input type="password" class="form-control" id="contraseña" name="contraseña" required>
+            </div>
+            <!-- Sección de fecha de creación (oculta) -->
+            <div class="campo">
+                <input value="" type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" hidden>
+            </div>
+            <!-- Sección de rol (oculto) -->
+            <div class="campo">
+                <input value="2" type="number" class="form-control" id="rol_id" name="rol_id" hidden>
+            </div>
+            <!-- Botón de registro -->
+            <button type="submit" class="btn_inicio botones">Registrarse</button>
+        </form>
     </div>
+
     <script>
         // Obtener la fecha actual
         const today = new Date();
